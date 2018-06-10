@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="vue.js"></script>
+	<style type="text/css">
+		input { border:1px solid #000; }
+		#div12 { width: 200px; height: 200px; background: #ff0000; }
+	</style>
+</head>
+<body>
+	<div id="div1">
+		姓名：{{name}}
+		<input type="text" name="" v-model="txt">
+		<span :class="arr">{{txt}}</span>
+		<input type="text" name="" v-model="styleJson.color">
+		<span v-bind:title="title">这是一个span标签</span>
+		<span :title="title" :style="styleJson">这是一个span标签</span>
+		<!-- <button :onclick="a">按钮</button> -->
+		<button v-on:click="callfn">按钮</button>
+		<button @click="addfn">按钮</button>
+		<span>{{count}}</span>
+		<ul>
+			<li v-for="item,index in dataArr">
+				{{index}}{{item.name}}，年龄{{item.age}}
+			</li>
+		</ul>
+		<ul>
+			<li v-for="val,key in jsonArr">
+				{{key}}:姓名{{val.name}},年龄{{val.age}}
+			</li>
+		</ul>
+		<button @click="togglefn">显示/隐藏</button>
+		<div id="div12" v-show="show"></div>
+	</div>
+	<script type="text/javascript">
+		window.onload=function(){
+			let vm = new Vue({
+				el:'#div1', //根元素
+				data:{
+					//a:'alert(123)',
+					show:true,
+					dataArr:[
+						{name:'姓名一',age:18},
+						{name:'姓名二',age:28},
+						{name:'姓名三',age:38},
+					],
+					jsonArr:{
+						'111':{name:'zhangsan1',age:18},
+						'222':{name:'zhangsan2',age:28},
+						'333':{name:'zhangsan3',age:38}
+					},
+					count:0,
+					name:'yunfree',
+					arr:['aaa','bbb','ccc'],
+					txt:'',
+					title:'这是一个span标签',
+					styleJson:{
+						color:'',
+						'font-size':'30px',
+						'font-weight':700
+					}
+				},
+				methods:{
+					callfn(){
+						alert('123');
+					},
+					addfn(){
+						this.count++;
+					},
+					togglefn(){
+						this.show=!this.show;
+					}
+				}
+
+			})
+		}
+	</script>
+</body>
+</html>
